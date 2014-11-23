@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="google-site-verification" content="_yAuO_sJCBII44yZfYWqXZPeJ-oIsqlIFDI04oLskvQ" />
+<title>VoteSimulator - 台灣選舉模擬器</title>
+
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <!-- Bootstrap -->
+  <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.8/d3.min.js" charset="utf-8"></script>
+
+  <!-- USER DEFINED -->
+  <link href="./css/main.css" rel="stylesheet">
+  <script src="./js/init.js"></script>
+
+
+
+</head>
+
+<body class="body">
+
+<div class="navbar  navbar-fixed-top main_bg shadow " >
+  <div class="container-fluid">
+    <div class="navbar-header"  >
+    <!--Project Name -->
+      <a class="navbar-brand" href="#">VoteSimulator</a>
+      <ul class="nav nav-pills pull-left">
+          <li><a href="http://ntuaha.github.io/about/">@ aha </a></li>
+          <li><a href="http://ntuaha.github.io/VoteCash/">選舉金流指南</a></li>
+          <li><a href="https://github.com/ntuaha/VoteSimulator">Github</a></li>
+<!--          <li><a href="mailto:ntuaha@gmail.com">Contact Me</a></li> -->
+        </ul>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- Banner -->
+<div class="jumbotron shadow white_bg">
+  <div class="container-fluid " >
+  <h1>台灣選舉模擬器</h1>
+  <p> 民調? 空氣票? 還是?</p>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- Content -->
+<div class="container-fluid " >
+
+
+
+
+
+
+
+<div class="col-md-10">
+
+ <!-- 緣起  -->
+  <div class="row row_padding  ">
+    <div class="col-md-12 shadow white_bg">
+      <h2 id="chap1">緣起</h2>
+      <p>每次選舉我們都會很好奇，到底民調與最後選舉結果是不是有相關性．但很少看見有人真的去根據民調與其他的資料搭配之後，將預估得票數計算做成報告．因此希望透過這次的<strong>台北市長選舉</strong>相關資料，能夠讓這個問題得到初步的解決</p>
+
+    </div>
+  </div>
+
+<!-- 探討問題  -->
+  <div class="row row_padding">
+    <div class="col-md-12 shadow white_bg">
+      <h2  id="chap2">探討問題</h2>
+      <p>本研究主要是針對以下幾個變數做調整</p>
+      <ol>
+        <li>台北市 2014 年可投票人數</li>
+        <li>各年齡層真的會去投票比率</li>
+        <li>最後一次的民調 － 2014/11/15</li>
+      </ol>
+    </div>
+  </div>
+
+<!-- 資料範圍 -->
+  <div class="row row_padding">
+    <div class="col-md-12 shadow white_bg">
+    <h2 id="chap3">資料來源</h2>
+      <div class="col-md-6 col-md-offset-3 ">
+        <table class="table table-hover" id="data_source">
+          <thead><td>項目</td><td>說明</td></thead>
+          <hbody>
+            <tr><td><a href="http://www.dgbas.gov.tw/ct.asp?xItem=15408&CtNode=4594&mp=1">2014 主計處各縣市人口統計</a></td><td>每年都會有一份統計數據放在主計處網站，這次為了快，手動自己解出來</td></tr>
+            <tr><td><a href="http://www1.tvbs.com.tw/FILE_DB/DL_DB/even/200804/even-20080402101905.pdf">2008 TVBS 總統大選後兩天民調</a></td><td>用當時強調<strong>改變</strong>的氣氛來詮釋這是台北市各年齡層的投票比例</td></tr>
+            <tr><td><a href="http://www.polls.com.tw/webc/html/news/show.aspx?root=1&num=166&page=1">2014/11/15 趨勢.民意調查</a></td><td>法律規定最後一次的民意調查，根據過去經驗，越接近越準</td></tr>
+          </hbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<!-- 注意事項 -->
+  <div class="row row_padding">
+    <div class="col-md-12 shadow white_bg">
+      <h2 id="chap4">注意事項</h2>
+      <p>已經整理好的資料放置到<a href="https://docs.google.com/spreadsheets/d/1Pq9Zt7xUB6oDmBvJ9Y9BiM8G4Pf-VhLZRLclJwI9cJw/edit#gid=1530417654">https://docs.google.com/spreadsheets/d/1Pq9Zt7xUB6oDmBvJ9Y9BiM8G4Pf-VhLZRLclJwI9cJw/edit#gid=1530417654</a></p>
+      <p>此分析並沒有考慮到候選人自身因素或者當時時空背景，僅由原始資料做簡單整理呈現結果，根據經驗來說，雖然並非完全準確的反映現況，但通常在<strong>大數據威能</strong>下，真正答案大多存在於平均數附近</p>
+
+    </div>
+  </div>
+
+
+
+
+
+  <!-- Figure1 -->
+  <div class="row row_padding">
+    <div class="col-md-12 shadow white_bg">
+      <h2 id="chap5">各年齡層預估真的會去投票的票數</h2>
+        <p>透過2014台北市人口組成，以及根據2008 TVBS的投票率計算得知</p>
+
+        <img src="./res/F1.png" alt="各年齡層預估真的會去投票的票數" class="img-thumbnail img-responsive shadow row_padding"/>
+
+
+        <ol>
+          <li>預估台北市會去投得票數有<storng>192萬</storng></li>
+          <li><strong>40-49歲</strong>是最多人的</li>
+          <li><strong>20-29歲 與 30-39歲 </strong>這兩大板塊人數都是倒數多(還記得少子化嗎) </li>
+        </ol>
+
+    </div>
+  </div>
+
+<!-- Figure2  3-->
+  <div class="row row_padding">
+    <div class="col-md-12 shadow white_bg">
+      <h2 id="chap6">政黨每張票需要的花費的金額</h2>
+
+
+      <p>下圖各政黨民意代表的票價．橫軸單位<strong>元新台幣</strong>，縱軸為<strong>選舉類別</strong>．透過Boxplot，找出各級選舉平均每張票的Q1 Q3 與中位數．紅色數字代表資料筆數</p>
+
+      <img src="./res/F2.png" alt="民意代表" class="img-thumbnail img-responsive shadow row_padding"/>
+
+      <p>下圖為各政黨全國或地方首長的票價．橫軸單位<strong>元新台幣</strong>，縱軸為<strong>選舉類別</strong>．透過Boxplot，找出各級選舉平均每張票的Q1 Q3 與中位數．紅色數字代表資料筆數</p>
+
+      <img src="./res/F3.png" alt="民意代表" class="img-thumbnail img-responsive shadow row_padding"/>
+
+      <ol>
+        <li><strong>國民黨在民意代表各級選舉經費與選舉層級有正相關</strong>，同時國民黨很願意在這個類型選舉投入較多的金額</li>
+        <li>鄉鎮市長選舉<strong>不論是哪個黨派，或者無黨籍</strong>，一張票大約都是100元，選村里長則是20元到40元之間</li>
+        <li>民進黨在縣市長以上層級，其民代得票所需成本約150元上下</li>
+      </ol>
+
+
+    </div>
+  </div>
+
+
+<!-- Figure4-->
+  <div class="row row_padding">
+    <div class="col-md-12 shadow white_bg">
+      <h2 id="chap7">勝選與敗選每張票需要的花費的金額</h2>
+
+
+      <p>依勝敗選的票價．橫軸為<strong>選舉類別</strong>，縱軸單位<strong>元新台幣</strong>，．透過Boxplot，找出各級選舉平均每張票的Q1 Q3 與中位數．紅色數字代表資料筆數</p>
+
+      <img src="./res/F4.png" alt="勝選與敗選每張票需要的花費的金額" class="img-thumbnail img-responsive shadow row_padding"/>
+
+
+      <ol>
+        <li>在縣市長以上，地方首長當選的花的金額都沒當選比較<strong>少</strong></li>
+        <li><strong>村里長</strong>要當選就是要花比較多錢</li>
+        <li><strong>各級民代</strong>要當選也是要花比較多錢</li>
+      </ol>
+
+
+    </div>
+  </div>
+
+
+<!-- Figure5-->
+  <div class="row row_padding">
+    <div class="col-md-12 shadow white_bg">
+      <h2 id="chap8">連任每張票需要的花費的金額</h2>
+
+
+      <p>依勝敗選的票價．橫軸為<strong>選舉類別</strong>，縱軸單位<strong>元新台幣</strong>，．透過Boxplot，找出各級選舉平均每張票的Q1 Q3 與中位數．紅色數字代表資料筆數．水平左右為是否當選（左為當選，右為落選），而垂直分隔則是是否連任（上為連任，下為非現任）</p>
+
+      <img src="./res/F5.jpeg" alt="連任每張票需要的花費的金額" class="img-thumbnail img-responsive shadow row_padding"/>
+
+
+      <ol>
+        <li>現任的當選人需要的金額比非現任的當選人還要少，很明顯<strong>現任的確有其優勢</strong></li>
+        <li>由於五都資料是第一屆，所以沒有現任資料</li>
+        <li>可以看到很多人<strong>選里長都不花錢，但都沒上...</strong></li>
+      </ol>
+
+
+    </div>
+  </div>
+
+
+
+<!-- Figure5-->
+  <div class="row row_padding">
+    <div class="col-md-12 shadow white_bg">
+      <h2 id="chap9">結論</h2>
+
+       <p>以下統整之前幾張圖表告訴我們幾件重要的事情</p>
+
+        <ol>
+          <li>選里長所需要的每張票的經費是最少的，但<strong>千萬不要不花錢，這鐵定落選</strong></li>
+          <li>總統其實是另一個層級要得到一張票ＣＰ值高的職務，但要有足夠的財力，這會是一個非常優質的投資</li>
+          <li><strong>各級民意代表</strong>應該是最有錢或者是權力的職位，從每張票所需要花費的金額來說都是比各級首長還要高</li>
+          <li>在鄉鎮市長以下的選舉，政黨並不影響每張票的價值，也就是說台灣還是<strong>地方政治角力為主要的政治基底</strong></li>
+        </ol>
+
+        <p>這個工作還沒有完成，還有很多事情需要補完，像是<strong>互動式圖表</strong>，各年度經費需要透過<strong>CPI修正</strong>，納入<strong>各鄉鎮實質可投票人數</strong>，或者是深入瞭解勝選人<strong>經費花費的結構</strong>，這些有趣的議題都還埋藏在這份資料之中．也因此歡迎<strong>有興趣的人聯絡我</strong>，一起把這些資訊往下專研揭露出來，讓之後有興趣投身政治的人，對於選戰所需的資源有初步快速的瞭解</p>
+
+
+    </div>
+  </div>
+
+
+
+<!-- 留言區 -->
+  <div class="row row_padding">
+    <div class="col-md-12 shadow white_bg">
+        <!-- DISQUE -->
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'votesimulator'; // required: replace example with your forum shortname
+        var disqus_title = '台灣選舉模擬器';
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+<!-- 導覽列 -->
+<div class="col-md-2">
+  <div class="nav_list " id="navbar" role="navigation">
+  <ul class="list-group nav shadow">
+
+    <li class="list-group-item"><a href="#" >回頁首</a></li>
+    <li class="list-group-item"><a href="#chap1" >緣起</a></li>
+    <li class="list-group-item"><a href="#chap2">談討問題</a></li>
+    <li class="list-group-item"><a href="#chap3">資料來源</a></li>
+    <li class="list-group-item"><a href="#chap4">注意事項</a></li>
+    <li class="list-group-item"><a href="#chap5">一票值多少</a></li>
+    <li class="list-group-item"><a href="#chap6">政黨花費金額</a></li>
+    <li class="list-group-item"><a href="#chap7">勝敗選花費金額</a></li>
+    <li class="list-group-item"><a href="#chap8">連任花費金額</a></li>
+    <li class="list-group-item"><a href="#chap9">結論</a></li>
+  </ul>
+  </div>
+
+
+</div>
+
+</div>
+<div class="container-fluid " >
+  <div class="footer row col-md-12">
+
+  </div>
+</div>
+
+
+  <!-- Boostrap-->
+  <script src="./bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- Google Analytics -->
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-13170575-12', 'auto');
+    ga('require', 'linkid', 'linkid.js');
+    ga('require', 'displayfeatures');
+    ga('set', '&uid', '94230772');
+    ga('send', 'pageview');
+
+  </script>
+
+</body>
+
+</html>

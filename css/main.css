@@ -1,0 +1,102 @@
+.body{
+ background-color:#C8C8C8;
+
+}
+
+body {
+  position: relative;
+}
+
+
+.main_bg{
+  transition-delay: 0s;
+  background-color: white;
+  line-height: 32px;
+  border-radius: 2px;
+  font-size: 0.9em;
+  color: #646464;
+  border-bottom: 1px solid rgb(44,157,142);
+
+}
+
+
+.nav_list{
+  position:fixed;
+  z-index: 99;
+}
+
+div.row div{
+  color:black;
+  font-size:1.2em;
+}
+
+.focus{
+  border-bottom: 10px solid rgba(44,157,142,0.5);
+}
+
+
+strong{
+  color:rgb(44,157,142);
+}
+
+
+.white_bg{
+  background-color:rgba(255,255,255,1);
+}
+
+.row_padding{
+  margin-bottom: 15px;
+}
+
+.shadow{
+  box-shadow: 0px 8px 17px 0  rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+
+}
+
+li.list-group-item> a,
+li.list-group-item> a:hover,
+li.list-group-item> a:focus {
+  color: rgb(44,157,142);
+  padding:0px;
+
+
+}
+
+li.list-group-item{
+  border-left: 3px solid rgba(0,0,0,0);
+  cursor:pointer;
+}
+
+
+li.list-group-item:hover{
+
+  border-left: 3px solid rgb(169,68,66);
+
+}
+
+li.list-group-item.active{
+  background:#fcf8e3;
+  border-left: 3px solid rgb(44,157,142);
+}
+
+
+
+.nav>li>a:hover,
+.nav>li>a:focus{
+  background:none;
+}
+
+.navbar-header a,
+.navbar-header a:hover,
+.navbar-header a:focus {
+  color: rgb(44,157,142);
+}
+
+.footer{
+  display:block;
+}
+
+
+
+
