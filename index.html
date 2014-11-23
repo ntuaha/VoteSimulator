@@ -96,16 +96,14 @@
   <div class="row row_padding">
     <div class="col-md-12 shadow white_bg">
     <h2 id="chap3">資料來源</h2>
-      <div class="col-md-6 col-md-offset-3 ">
-        <table class="table table-hover" id="data_source">
-          <thead><td>項目</td><td>說明</td></thead>
-          <hbody>
-            <tr><td><a href="http://www.dgbas.gov.tw/ct.asp?xItem=15408&CtNode=4594&mp=1">2014 主計處各縣市人口統計</a></td><td>每年都會有一份統計數據放在主計處網站，這次為了快，手動自己解出來</td></tr>
-            <tr><td><a href="http://www1.tvbs.com.tw/FILE_DB/DL_DB/even/200804/even-20080402101905.pdf">2008 TVBS 總統大選後兩天民調</a></td><td>用當時強調<strong>改變</strong>的氣氛來詮釋這是台北市各年齡層的投票比例</td></tr>
-            <tr><td><a href="http://www.polls.com.tw/webc/html/news/show.aspx?root=1&num=166&page=1">2014/11/15 趨勢.民意調查</a></td><td>法律規定最後一次的民意調查，根據過去經驗，越接近越準</td></tr>
-          </hbody>
-        </table>
-      </div>
+      <table class="table table-hover" id="data_source">
+        <thead><td>項目</td><td>說明</td></thead>
+        <hbody>
+          <tr><td><a href="http://www.dgbas.gov.tw/ct.asp?xItem=15408&CtNode=4594&mp=1">2014 主計處各縣市人口統計</a></td><td>每年都會有一份統計數據放在主計處網站，這次為了快，手動自己解出來</td></tr>
+          <tr><td><a href="http://www1.tvbs.com.tw/FILE_DB/DL_DB/even/200804/even-20080402101905.pdf">2008 TVBS 總統大選後兩天民調</a></td><td>用當時強調<strong>改變</strong>的氣氛來詮釋這是台北市各年齡層的投票比例</td></tr>
+          <tr><td><a href="http://www.polls.com.tw/webc/html/news/show.aspx?root=1&num=166&page=1">2014/11/15 趨勢.民意調查</a></td><td>法律規定最後一次的民意調查，根據過去經驗，越接近越準</td></tr>
+        </hbody>
+      </table>
     </div>
   </div>
 
@@ -127,13 +125,13 @@
   <div class="row row_padding">
     <div class="col-md-12 shadow white_bg">
       <h2 id="chap5">各年齡層預估真的會去投票的票數</h2>
-        <p>透過2014台北市人口組成，以及根據2008 TVBS的投票率計算得知</p>
+        <p>透過2014台北市人口組成20-29 30-39 40-49 50-59 60-69 70+，以及根據2008 TVBS的投票率計算得知</p>
 
         <img src="./res/F1.png" alt="各年齡層預估真的會去投票的票數" class="img-thumbnail img-responsive shadow row_padding"/>
 
 
         <ol>
-          <li>預估台北市會去投得票數有<storng>192萬</storng></li>
+          <li>預估台北市會去投得票數有<strong>192萬</strong></li>
           <li><strong>40-49歲</strong>是最多人的</li>
           <li><strong>20-29歲 與 30-39歲 </strong>這兩大板塊人數都是倒數多(還記得少子化嗎) </li>
         </ol>
@@ -144,21 +142,18 @@
 <!-- Figure2  3-->
   <div class="row row_padding">
     <div class="col-md-12 shadow white_bg">
-      <h2 id="chap6">政黨每張票需要的花費的金額</h2>
+      <h2 id="chap6">台北市各年齡層預估票數</h2>
 
 
-      <p>下圖各政黨民意代表的票價．橫軸單位<strong>元新台幣</strong>，縱軸為<strong>選舉類別</strong>．透過Boxplot，找出各級選舉平均每張票的Q1 Q3 與中位數．紅色數字代表資料筆數</p>
+      <p>根據會去投票票數再乘上民調分配</p>
 
-      <img src="./res/F2.png" alt="民意代表" class="img-thumbnail img-responsive shadow row_padding"/>
+      <img src="./res/F2.png" alt="台北市各年齡層預估票數" class="img-thumbnail img-responsive shadow row_padding"/>
 
-      <p>下圖為各政黨全國或地方首長的票價．橫軸單位<strong>元新台幣</strong>，縱軸為<strong>選舉類別</strong>．透過Boxplot，找出各級選舉平均每張票的Q1 Q3 與中位數．紅色數字代表資料筆數</p>
-
-      <img src="./res/F3.png" alt="民意代表" class="img-thumbnail img-responsive shadow row_padding"/>
 
       <ol>
-        <li><strong>國民黨在民意代表各級選舉經費與選舉層級有正相關</strong>，同時國民黨很願意在這個類型選舉投入較多的金額</li>
-        <li>鄉鎮市長選舉<strong>不論是哪個黨派，或者無黨籍</strong>，一張票大約都是100元，選村里長則是20元到40元之間</li>
-        <li>民進黨在縣市長以上層級，其民代得票所需成本約150元上下</li>
+        <li>表態之中，柯文哲59歲以下都贏，在20-39歲區塊是壓倒性勝利(就算其他人家尚未表態都不可能贏)</li>
+        <li>KMT以 60-69歲為主力，特別是<strong>票數跟著年齡是正相關</strong></li>
+        <li>不表態的人數也是<strong>跟年齡正相關(抖)</strong></li>
       </ol>
 
 
@@ -169,45 +164,24 @@
 <!-- Figure4-->
   <div class="row row_padding">
     <div class="col-md-12 shadow white_bg">
-      <h2 id="chap7">勝選與敗選每張票需要的花費的金額</h2>
+      <h2 id="chap7">預估投票結果</h2>
 
 
-      <p>依勝敗選的票價．橫軸為<strong>選舉類別</strong>，縱軸單位<strong>元新台幣</strong>，．透過Boxplot，找出各級選舉平均每張票的Q1 Q3 與中位數．紅色數字代表資料筆數</p>
+      <p>直接加總上述各陣營數據</p>
 
-      <img src="./res/F4.png" alt="勝選與敗選每張票需要的花費的金額" class="img-thumbnail img-responsive shadow row_padding"/>
+      <img src="./res/F3.png" alt="預估投票結果" class="img-thumbnail img-responsive shadow row_padding"/>
 
 
       <ol>
-        <li>在縣市長以上，地方首長當選的花的金額都沒當選比較<strong>少</strong></li>
-        <li><strong>村里長</strong>要當選就是要花比較多錢</li>
-        <li><strong>各級民代</strong>要當選也是要花比較多錢</li>
+        <li>已表態部分，<strong>柯文哲贏19萬張票</strong></li>
+        <li>已表態部分，<strong>馮光遠拿不回保證金</strong></li>
+        <li>考慮全部不表態趨勢與KMT趨勢相似，最<strong>極端</strong>狀況就是都是ＫＭＴ的票，那麼<strong>KMT贏 32萬張票</strong></li>
       </ol>
 
 
     </div>
   </div>
 
-
-<!-- Figure5-->
-  <div class="row row_padding">
-    <div class="col-md-12 shadow white_bg">
-      <h2 id="chap8">連任每張票需要的花費的金額</h2>
-
-
-      <p>依勝敗選的票價．橫軸為<strong>選舉類別</strong>，縱軸單位<strong>元新台幣</strong>，．透過Boxplot，找出各級選舉平均每張票的Q1 Q3 與中位數．紅色數字代表資料筆數．水平左右為是否當選（左為當選，右為落選），而垂直分隔則是是否連任（上為連任，下為非現任）</p>
-
-      <img src="./res/F5.jpeg" alt="連任每張票需要的花費的金額" class="img-thumbnail img-responsive shadow row_padding"/>
-
-
-      <ol>
-        <li>現任的當選人需要的金額比非現任的當選人還要少，很明顯<strong>現任的確有其優勢</strong></li>
-        <li>由於五都資料是第一屆，所以沒有現任資料</li>
-        <li>可以看到很多人<strong>選里長都不花錢，但都沒上...</strong></li>
-      </ol>
-
-
-    </div>
-  </div>
 
 
 
@@ -219,13 +193,13 @@
        <p>以下統整之前幾張圖表告訴我們幾件重要的事情</p>
 
         <ol>
-          <li>選里長所需要的每張票的經費是最少的，但<strong>千萬不要不花錢，這鐵定落選</strong></li>
-          <li>總統其實是另一個層級要得到一張票ＣＰ值高的職務，但要有足夠的財力，這會是一個非常優質的投資</li>
-          <li><strong>各級民意代表</strong>應該是最有錢或者是權力的職位，從每張票所需要花費的金額來說都是比各級首長還要高</li>
-          <li>在鄉鎮市長以下的選舉，政黨並不影響每張票的價值，也就是說台灣還是<strong>地方政治角力為主要的政治基底</strong></li>
+          <li>已表態部分，<strong>馮光遠拿不回保證金</strong></li>
+          <li>柯文哲沒想像中的穩定，輸的機率不低，其實透過未來事件交易所看到的是看好度，如果根據看好度來說，其實最差柯文哲都能贏5萬票，但這太不準了</li>
+          <li>KMT的實力絕對深不可測</li>
+
         </ol>
 
-        <p>這個工作還沒有完成，還有很多事情需要補完，像是<strong>互動式圖表</strong>，各年度經費需要透過<strong>CPI修正</strong>，納入<strong>各鄉鎮實質可投票人數</strong>，或者是深入瞭解勝選人<strong>經費花費的結構</strong>，這些有趣的議題都還埋藏在這份資料之中．也因此歡迎<strong>有興趣的人聯絡我</strong>，一起把這些資訊往下專研揭露出來，讓之後有興趣投身政治的人，對於選戰所需的資源有初步快速的瞭解</p>
+        <p>這個工作還沒有完成，還有很多事情需要補完，像是<strong>互動式圖表</strong>達到真正的模擬器．但受限時間問題，後續有空再補上或者來信，我們可以一起來完成它!</p>
 
 
     </div>
@@ -268,10 +242,9 @@
     <li class="list-group-item"><a href="#chap2">談討問題</a></li>
     <li class="list-group-item"><a href="#chap3">資料來源</a></li>
     <li class="list-group-item"><a href="#chap4">注意事項</a></li>
-    <li class="list-group-item"><a href="#chap5">一票值多少</a></li>
-    <li class="list-group-item"><a href="#chap6">政黨花費金額</a></li>
-    <li class="list-group-item"><a href="#chap7">勝敗選花費金額</a></li>
-    <li class="list-group-item"><a href="#chap8">連任花費金額</a></li>
+    <li class="list-group-item"><a href="#chap5">各年齡層預估真的會去投票的票數</a></li>
+    <li class="list-group-item"><a href="#chap6">台北市各年齡層預估票數</a></li>
+    <li class="list-group-item"><a href="#chap7">預估投票結果</a></li>
     <li class="list-group-item"><a href="#chap9">結論</a></li>
   </ul>
   </div>
