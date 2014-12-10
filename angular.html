@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="" >
+
+<head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+
+function PieController($scope){
+  $scope.show = function(){
+    $scope.name="123";
+  };
+  //$scope.show();
+
+}
+$(function(){
+  //alert("test");
+});
+</script>
+</head>
+
+<body ng-controller="PieController">
+
+<hr>
+<button class="btn btn-success" ng-click="show()">
+<span class="glyphicon glyphicon-user"></span>  Show
+</button>
+<hr>
+
+<div ng-hide="false">
+  <p>Name: <input type="text" ng-model="name"></p>
+  <p ng-bind="name"></p>
+</div>
+
+</body>
+</html>
