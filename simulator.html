@@ -19,21 +19,20 @@ var data = [
 ];
 var gg = null;
 function PieController($scope){
-  $scope.show = function(){
-    $scope.name="123";
-    $scope.names = [{name:'aa',country:'123'}, {name:'bb',country:'456'}, {name:'cc',country:'7789'}, {name:'kk',country:'rr'}];
-    //$scope.data = angular.copy(window.data);
-    //$scope.data
 
+  $scope.show = function(){
     document.getElementById("dashboard").innerHTML="";
     dashboard('#dashboard',$scope.data);
   };
-  //document.getElementById("dashboard").innerHTML="";
+  $scope.reset = function(){
+    $scope.data = angular.copy(window.data);
+    document.getElementById("dashboard").innerHTML="";
+    dashboard('#dashboard',$scope.data);
+  }
   $scope.data = angular.copy(window.data);
   $scope.parseInt = parseInt;
   dashboard('#dashboard',$scope.data);
 
-  //$scope.show();
 
 }
 
@@ -41,10 +40,6 @@ function PieController($scope){
 
 
 <style>
-body{
-    width:1060px;
-    margin:50px auto;
-}
 path {  stroke: #fff; }
 path:hover {  opacity:0.9; }
 rect:hover {  fill:blue; }
@@ -91,6 +86,9 @@ rect:hover {  fill:blue; }
 <hr>
 <button class="btn btn-success" ng-click="show()">
 <span class="glyphicon glyphicon-user"></span> Update
+</button>
+<button class="btn btn-success" ng-click="reset()">
+<span class="glyphicon glyphicon-user"></span> reset
 </button>
 <hr>
 
