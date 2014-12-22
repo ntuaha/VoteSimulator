@@ -19,6 +19,35 @@ var data = [
 {"age":70,"No5":0,"No6":0.376,"No7":0.282,"NoComment":0.342,"pop":376245,"voterate":0.9 }
 ];
 var gg = null;
+
+
+
+  var app = angular.module('',[]);
+  app.directive('dashboard',['d3Service',function(d3Service){
+    var link = function(scope,elem,attrs){
+
+          window.onfocus = function() {
+            scope.$apply();
+          };
+          scope.$watch(
+            scope.data,
+            function(newData,oldData){
+              console.log(newData);
+              document.getElementById("dashboard").innerHTML="";
+              dashboard('#dashboard',newData);
+            }
+          );
+    };
+    return {
+      restrict:'AE',
+      scope:"=",
+      link:link(scope,elem,attrs)
+    };
+
+  }]);
+
+
+
 function PieController($scope){
 
   $scope.show = function(){
@@ -29,6 +58,9 @@ function PieController($scope){
     $scope.data = angular.copy(window.data);
     document.getElementById("dashboard").innerHTML="";
     dashboard('#dashboard',$scope.data);
+  }
+  $scope.test=function(){
+    console.log($scope.data);
   }
   $scope.data = angular.copy(window.data);
   $scope.parseInt = parseInt;
@@ -45,10 +77,12 @@ function PieController($scope){
 
 </head>
 
-<div id='dashboard'>
-</div>
+
 
 <body ng-controller="PieController">
+
+<div id='dashboard' dashboard>
+</div>
 
 <hr>
 <button class="btn btn-success" ng-click="show()">
@@ -70,7 +104,7 @@ function PieController($scope){
   <tbody>
     <tr ng-repeat="y in data">
       <td ng-bind="y.age"></td>
-      <td><input ng-model="y.No5"></td>
+      <td><input ng-model="y.No5" ng-change="test()"></td>
       <td><input ng-model="y.No6"></td>
       <td><input ng-model="y.No7"></td>
       <td><input ng-model="y.NoComment"></td>
