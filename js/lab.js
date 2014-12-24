@@ -23,6 +23,20 @@
     app.controller('VoteSimulator',['$scope',function($scope){
       $scope.pops = pop;
       $scope.vote_rates = vote_rate;
+      $scope.supports = supports;
+      var no_comment = {name:"不表態",no:0,party:"無"};
+      var rate = {"20":0,"30":0,"40":0,"50":0,"60":0,"70+":0};
+      for (var i in $scope.supports){
+        for (var j in rate){
+          rate[j] = rate[j] + $scope.supports[i].rate[j];
+        }
+      }
+      for (var j in rate){
+        rate[j] = 1 - rate[j];
+      }
+      no_comment.rate = rate;
+      no_comment.color = "#aaa";
+      $scope.supports.push(no_comment);
 
       $scope.getVotePop = function(i){
         console.log( "T"+$scope.pops[i] * $scope.vote_rates[i]);
@@ -63,31 +77,20 @@
 
 
 
-
-
-
-      $scope.supports = supports;
-      var no_comment = {name:"不表態",no:0,party:"無"};
-      var rate = {"20":0,"30":0,"40":0,"50":0,"60":0,"70+":0};
-      for (var i in $scope.supports){
-        for (var j in rate){
-          rate[j] = rate[j] + $scope.supports[i].rate[j];
-        }
-      }
-      for (var j in rate){
-        rate[j] = 1 - rate[j];
-      }
-      no_comment.rate = rate;
-      no_comment.color = "#aaa";
-      $scope.supports.push(no_comment);
       //D3
 
       var dashBorard = new DashBoard("#dashboard",$scope.supports,$scope.vote_rates,$scope.pops);
+      //Refresh Dashboard if parameters are updated.
       var list = ['supports','vote_rates','pops'];
       for (var i in list){
         $scope.$watch(list[i],function(){
-          document.getElementById("dashboard").innerHTML="";
-          var dashBorard = new DashBoard("#dashboard",$scope.supports,$scope.vote_rates,$scope.pops);
+          //histogram
+          dashBorard.updateData($scope.supports,$scope.vote_rates,$scope.pops);
+          dashBorard.hG.update(dashBorard.fData.map(function(v){
+            return [v.State,v.total];}), dashBorard.barColor);
+          //pei
+          dashBorard.pC.update(dashBorard.tF);
+          dashBorard.leg.update(dashBorard.tF);
         },true);
       }
 
