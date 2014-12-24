@@ -1,34 +1,9 @@
 var DashBoard = function(id,supports,vote_rates,pops){
     var _this = this;
     _this.id = id;
-    _this.supports = supports;
-    _this.vote_rates = vote_rates;
-    _this.pops = pops;
-    _this.fData = [];
     _this.barColor = '#AA9A66';
-    _this.colors = {};
-    _this.names = [];
-    _this.ages = [];
-    for(var i in _this.supports){
-        _this.colors[_this.supports[i].name] = _this.supports[i].color;
-        _this.names.push(_this.supports[i].name);
-    }
-    for(var i in _this.vote_rates){
-        _this.ages.push(i);
-    }
+    _this.updateData(supports,vote_rates,pops);
 
-    _this.setData();
-
-
-    // function to handle legend.
-
-    // calculate total frequency by segment for all state.
-    _this.tF = _this.names.map(function(d){
-        return {type:d, freq: d3.sum(_this.fData.map(function(t){ return t.freq[d];}))};
-    });
-
-    // calculate total frequency by state for all segment.
-    _this.sF = this.fData.map(function(d){return [d.State,d.total];});
 
     _this.hG = _this.histoGram(_this.sF); // create the histogram.
     _this.pC = _this.pieChart(_this.tF); // create the pie-chart.
@@ -64,7 +39,7 @@ DashBoard.prototype.updateData = function(supports,vote_rates,pops){
     });
 
     // calculate total frequency by state for all segment.
-    _this.sF = this.fData.map(function(d){return [d.State,d.total];});
+    _this.sF = _this.fData.map(function(d){return [d.State,d.total];});
 };
 
 
