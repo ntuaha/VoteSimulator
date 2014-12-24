@@ -1,5 +1,4 @@
 
-
   (function(){
 
 
@@ -81,9 +80,8 @@
       no_comment.rate = rate;
       no_comment.color = "#aaa";
       $scope.supports.push(no_comment);
-
-
-
+      //D3
+      var dashBorard = new DashBoard("#dashboard",$scope.supports,$scope.vote_rates,$scope.pops);
     }]);
 
     app.directive("voteSimulator", function() {
@@ -91,6 +89,7 @@
         restrict:"A"
       };
     });
+
 
 
 
