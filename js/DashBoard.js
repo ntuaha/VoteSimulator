@@ -5,7 +5,7 @@ var DashBoard = function(id,supports,vote_rates,pops){
     _this.vote_rates = vote_rates;
     _this.pops = pops;
     _this.fData = [];
-    _this.barColor = 'steelblue';
+    _this.barColor = '#AA9A66';
     _this.colors = {};
     _this.names = [];
     _this.ages = [];
@@ -50,118 +50,98 @@ DashBoard.prototype.setData = function(){
         this.fData.push(k);
     }
 };
-/*
-    _this.fData = [];
-    var fData = [];
-    for (var index in data){
-        var k = {};
-        var d = data[index];
-        k.State = d.age;
-        k.freq ={"No5": parseInt(d.No5 *d.pop*d.voterate), "No6": parseInt(d.No6 *d.pop*d.voterate), "No7": parseInt(d.No7 *d.pop*d.voterate), "NC": parseInt(d.NoComment *d.pop*d.voterate)};
-        fData.push(k);
-    }
 
-
-    var barColor = 'steelblue';
-    */
 DashBoard.prototype.segColor = function(c){
     return this.colors[c];
 };
-/*
-    this.segColor=function(c){ return {No5:"yellow", No6:"blue",No7:"green",NC:"gray"}[c]; }
-    */
 
-    // compute total for each state.
-    //fData.forEach(function(d){d.total=d.freq.low+d.freq.mid+d.freq.high;});
-    /*
-    fData.forEach(function(d){d.total=d.freq.No5+d.freq.No6+d.freq.No7+d.freq.NC;});
-    */
 
     // function to handle histogram.
     // Initialize
 
 DashBoard.prototype.histoGram=function(fD){
-        var _this = this;
-        var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
-        hGDim.w = 500 - hGDim.l - hGDim.r,
-        hGDim.h = 300 - hGDim.t - hGDim.b;
+    var _this = this;
+    var hG={};
+    var hGDim = {t: 60, r: 0, b: 30, l: 0};
+    hGDim.w = 500 - hGDim.l - hGDim.r,
+    hGDim.h = 300 - hGDim.t - hGDim.b;
 
-        //create svg for histogram.
-        var hGsvg = d3.select(this.id).append("svg")
-            .attr("width", hGDim.w + hGDim.l + hGDim.r)
-            .attr("height", hGDim.h + hGDim.t + hGDim.b).append("g")
-            .attr("transform", "translate(" + hGDim.l + "," + hGDim.t + ")");
+    //create svg for histogram.
+    var hGsvg = d3.select(this.id).append("svg")
+        .attr("width", hGDim.w + hGDim.l + hGDim.r)
+        .attr("height", hGDim.h + hGDim.t + hGDim.b).append("g")
+        .attr("transform", "translate(" + hGDim.l + "," + hGDim.t + ")");
 
-        // create function for x-axis mapping.
-        var x = d3.scale.ordinal().rangeRoundBands([0, hGDim.w], 0.1)
-                .domain(fD.map(function(d) { return d[0]; }));
+    // create function for x-axis mapping.
+    var x = d3.scale.ordinal().rangeRoundBands([0, hGDim.w], 0.1)
+            .domain(fD.map(function(d) { return d[0]; }));
 
-        // Add x-axis to the histogram svg.
-        hGsvg.append("g").attr("class", "x axis")
-            .attr("transform", "translate(0," + hGDim.h + ")")
-            .call(d3.svg.axis().scale(x).orient("bottom"));
+    // Add x-axis to the histogram svg.
+    hGsvg.append("g").attr("class", "x axis")
+        .attr("transform", "translate(0," + hGDim.h + ")")
+        .call(d3.svg.axis().scale(x).orient("bottom"));
 
-        // Create function for y-axis map.
-        var y = d3.scale.linear().range([hGDim.h, 0])
-                .domain([0, d3.max(fD, function(d) { return d[1]; })]);
+    // Create function for y-axis map.
+    var y = d3.scale.linear().range([hGDim.h, 0])
+            .domain([0, d3.max(fD, function(d) { return d[1]; })]);
 
-        // Create bars for histogram to contain rectangles and freq labels.
-        var bars = hGsvg.selectAll(".bar").data(fD).enter()
-                .append("g").attr("class", "bar");
+    // Create bars for histogram to contain rectangles and freq labels.
+    var bars = hGsvg.selectAll(".bar").data(fD).enter()
+            .append("g").attr("class", "bar");
 
-        //create the rectangles.
-        bars.append("rect")
-            .attr("x", function(d) { return x(d[0]); })
-            .attr("y", function(d) { return y(d[1]); })
-            .attr("width", x.rangeBand())
-            .attr("height", function(d) { return hGDim.h - y(d[1]); })
-            .attr('fill',this.barColor)
-            .on("mouseover",mouseover)// mouseover is defined below.
-            .on("mouseout",mouseout);// mouseout is defined below.
+    //create the rectangles.
+    bars.append("rect")
+        .attr("x", function(d) { return x(d[0]); })
+        .attr("y", function(d) { return y(d[1]); })
+        .attr("width", x.rangeBand())
+        .attr("height", function(d) { return hGDim.h - y(d[1]); })
+        .attr('fill',this.barColor)
+        .on("mouseover",mouseover)// mouseover is defined below.
+        .on("mouseout",mouseout);// mouseout is defined below.
 
-        //Create the frequency labels above the rectangles.
-        bars.append("text").text(function(d){ return d3.format(",")(d[1])})
-            .attr("x", function(d) { return x(d[0])+x.rangeBand()/2; })
-            .attr("y", function(d) { return y(d[1])-5; })
-            .attr("text-anchor", "middle");
+    //Create the frequency labels above the rectangles.
+    bars.append("text").text(function(d){ return d3.format(",")(d[1])})
+        .attr("x", function(d) { return x(d[0])+x.rangeBand()/2; })
+        .attr("y", function(d) { return y(d[1])-5; })
+        .attr("text-anchor", "middle");
 
-        function mouseover(d){  // utility function to be called on mouseover.
-            // filter for selected state.
-            var st = _this.fData.filter(function(s){ return s.State == d[0];})[0],
-                nD = d3.keys(st.freq).map(function(s){ return {type:s, freq:st.freq[s]};});
+    function mouseover(d){  // utility function to be called on mouseover.
+        // filter for selected state.
+        var st = _this.fData.filter(function(s){ return s.State == d[0];})[0],
+            nD = d3.keys(st.freq).map(function(s){ return {type:s, freq:st.freq[s]};});
 
-            // call update functions of pie-chart and legend.
-            _this.pC.update(nD);
-            _this.leg.update(nD);
-        }
-
-        function mouseout(d){    // utility function to be called on mouseout.
-            // reset the pie-chart and legend.
-            _this.pC.update(_this.tF);
-            _this.leg.update(_this.tF);
-        }
-
-        // create function to update the bars. This will be used by pie-chart.
-        hG.update = function(nD, color){
-            // update the domain of the y-axis map to reflect change in frequencies.
-            y.domain([0, d3.max(nD, function(d) { return d[1]; })]);
-
-            // Attach the new data to the bars.
-            var bars = hGsvg.selectAll(".bar").data(nD);
-
-            // transition the height and color of rectangles.
-            bars.select("rect").transition().duration(500)
-                .attr("y", function(d) {return y(d[1]); })
-                .attr("height", function(d) { return hGDim.h - y(d[1]); })
-                .attr("fill", color);
-
-            // transition the frequency labels location and change value.
-            bars.select("text").transition().duration(500)
-                .text(function(d){ return d3.format(",")(d[1])})
-                .attr("y", function(d) {return y(d[1])-5; });
-        }
-        return hG;
+        // call update functions of pie-chart and legend.
+        _this.pC.update(nD);
+        _this.leg.update(nD);
     }
+
+    function mouseout(d){    // utility function to be called on mouseout.
+        // reset the pie-chart and legend.
+        _this.pC.update(_this.tF);
+        _this.leg.update(_this.tF);
+    }
+
+    // create function to update the bars. This will be used by pie-chart.
+    hG.update = function(nD, color){
+        // update the domain of the y-axis map to reflect change in frequencies.
+        y.domain([0, d3.max(nD, function(d) { return d[1]; })]);
+
+        // Attach the new data to the bars.
+        var bars = hGsvg.selectAll(".bar").data(nD);
+
+        // transition the height and color of rectangles.
+        bars.select("rect").transition().duration(500)
+            .attr("y", function(d) {return y(d[1]); })
+            .attr("height", function(d) { return hGDim.h - y(d[1]); })
+            .attr("fill", color);
+
+        // transition the frequency labels location and change value.
+        bars.select("text").transition().duration(500)
+            .text(function(d){ return d3.format(",")(d[1])})
+            .attr("y", function(d) {return y(d[1])-5; });
+    }
+    return hG;
+}
 
 
 
@@ -200,13 +180,14 @@ DashBoard.prototype.pieChart=function(pD){
         function mouseover(d){
             // call the update function of histogram with new data.
             _this.hG.update(_this.fData.map(function(v){
-                return [v.State,v.freq[d.data.type]];}),_this.segColor(d.data.type));
+                return [v.State,v.freq[d.data.type]];
+            }),_this.segColor(d.data.type));
         }
         //Utility function to be called on mouseout a pie slice.
         function mouseout(d){
             // call the update function of histogram with all data.
             _this.hG.update(_this.fData.map(function(v){
-                return [v.State,v.total];}), _this.barColor);
+            return [v.State,v.total];}), _this.barColor);
         }
         // Animating the pie-slice requiring a custom function which specifies
         // how the intermediate paths should be drawn.
@@ -233,8 +214,8 @@ DashBoard.prototype.legend=function(lD){
       .attr("fill",function(d){ return _this.segColor(d.type); });
 
         // create the second column for each segment.
-        var title = ["馮光遠", "連勝文","柯文哲","無評論"];
-        tr.append("td").text(function(d,i){ return /*d.type*/title[i] ;});
+        var title=_this.names;
+        tr.append("td").text(function(d,i){ return title[i] ;});
 
         // create the third column for each segment.
         tr.append("td").attr("class",'legendFreq')

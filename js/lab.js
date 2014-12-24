@@ -81,7 +81,18 @@
       no_comment.color = "#aaa";
       $scope.supports.push(no_comment);
       //D3
+
       var dashBorard = new DashBoard("#dashboard",$scope.supports,$scope.vote_rates,$scope.pops);
+      var list = ['supports','vote_rates','pops'];
+      for (var i in list){
+        $scope.$watch(list[i],function(){
+          document.getElementById("dashboard").innerHTML="";
+          var dashBorard = new DashBoard("#dashboard",$scope.supports,$scope.vote_rates,$scope.pops);
+        },true);
+      }
+
+
+
     }]);
 
     app.directive("voteSimulator", function() {
