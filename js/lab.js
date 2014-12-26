@@ -21,6 +21,42 @@
       };
     }]);
     app.controller('VoteSimulator',['$scope',function($scope){
+      $scope.input_data = '{"pops":{"20":302633,"30":384349,"40":438306,"50":419795,"60":393467,"70+":376245},"vote_rates":{"20":0.68,"30":0.78,"40":0.89,"50":0.89,"60":0.9,"70+":0.9},"supports":[{"name":"柯文哲","no":7,"color":"#777","party":"無","rate":{"20":0.538,"30":0.547,"40":0.406,"50":0.401,"60":0.381,"70+":0.282}},{"name":"連勝文","no":6,"color":"#428bca","party":"中國國民黨","rate":{"20":0.295,"30":0.183,"40":0.311,"50":0.307,"60":0.398,"70+":0.376}},{"name":"馮光遠","no":5,"color":"#777","party":"無","rate":{"20":0,"30":0.031,"40":0.008,"50":0,"60":0,"70+":0}}]}';
+      $scope.updateData = function(){
+        var json = angular.fromJson($scope.input_data);
+        if(json!=null){
+          $scope.pops = json.pops;
+          $scope.vote_rates = json.vote_rates;
+          $scope.supports = json.supports;
+        }
+
+        var no_comment = {name:"不表態",no:0,party:"無"};
+        var rate = {"20":0,"30":0,"40":0,"50":0,"60":0,"70+":0};
+        for (var i in $scope.supports){
+          for (var j in rate){
+            rate[j] = rate[j] + $scope.supports[i].rate[j];
+          }
+        }
+        for (var j in rate){
+          rate[j] = 1 - rate[j];
+        }
+        no_comment.rate = rate;
+        no_comment.color = "#aaa";
+        $scope.supports.push(no_comment);
+
+
+
+        console.log($scope.input_data);
+        console.log($scope.pops);
+         //histogram
+        dashBorard.updateData($scope.supports,$scope.vote_rates,$scope.pops);
+        dashBorard.hG.update(dashBorard.fData.map(function(v){
+          return [v.State,v.total];}), dashBorard.barColor);
+        //pei
+        dashBorard.pC.update(dashBorard.tF);
+        dashBorard.leg.update(dashBorard.tF);
+      };
+
       $scope.pops = pop;
       $scope.vote_rates = vote_rate;
       $scope.supports = supports;

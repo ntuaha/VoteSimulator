@@ -12,142 +12,154 @@
   <!--<body vote-simulator>-->
   <div class="container-flow">
     <h2>選舉模擬器</h2>
-    <div class="col-md-12" id="dashboard">
-
-    </div>
-    <!-- Begin of Parameter Pannel -->
-    <div class="col-md-6">
-      <h3>參數設定</h3>
-      <div>
-        <!-- Begin of 母體人數設定 -->
-        <div class="panel panel-default">
-          <div class="panel-heading"><h3 class="panel-title">母體人數設定</h3></div>
-          <table class="table table-striped" >
-            <thead>
-              <tr>
-                <td class="col-md-1" >年齡層</td>
-                <td class="col-md-1 text-center" ng-repeat="(key,value) in pops" >{{key}}</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="col-md-1">
-                  全體人數
-                </td>
-                <td class="col-md-1" ng-repeat="(key,pop) in pops">
-                  <div ><input class="form-control" type="text"  ng-model="pop" ng-change="setPop(key,pop)"/></div>
-                </td>
-              </tr>
-              <tr>
-                <td class="col-md-1" >投票比例</td>
-                <td class="col-md-1" ng-repeat="(key,vote_rate) in vote_rates">
-                  <div>
-                    <input class="form-control" ng-model="vote_rate" ng-change="setVoteRate(key,vote_rate)"/>
-                  </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- End of 母體人數設定 -->
-        <!-- Begin of 各候選人 -->
-        <div class="panel panel-default">
-          <div class="panel-heading"><h3 class="panel-title">民調支持率</h3></div>
-          <table class="table table-striped">
-            <tbody>
-              <tr ng-repeat = "support in supports">
-                <td class="col-md-1">{{support.name}}</td>
-                <td class="col-md-1" ng-repeat="(key,r) in support.rate" >
-                  <div><input class="form-control" ng-model="r" ng-change="setSupportRate(support,key,r)"/></div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- End of 各候選人 -->
+    <!-- Begin of 1st row -->
+    <div class="row">
+      <div class="col-md-7" id="dashboard">
+      <!-- Dashboard -->
+      </div>
+      <div class="col-md-3 col-md-1-offset">
+        <textarea class="form-control" rows="15" ng-model="input_data" placeholder="請輸入參數JSON" ng-change="updateData()"></textarea>
       </div>
     </div>
-    <!-- End of Parameter Pannel -->
-    <!-- Begin of Result Pannel -->
-    <div class="col-md-6">
-    <h3>模擬成果</h3>
-    <div>
-        <div class="panel panel-default">
-          <div class="panel-heading"><h3 class="panel-title">各年齡票數</h3></div>
-          <div class="panel-body">
-            各年齡人數 * 預估會投票比率
+    <!-- End of 1st row -->
+    <!-- Begin of 2nd row -->
+    <div class="row">
+      <!-- Begin of Parameter Pannel -->
+      <div class="col-md-6">
+        <h3>參數設定</h3>
+        <div>
+          <!-- Begin of 母體人數設定 -->
+          <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">母體人數設定</h3></div>
+            <table class="table table-striped" >
+              <thead>
+                <tr>
+                  <td class="col-md-1" >年齡層</td>
+                  <td class="col-md-1 text-center" ng-repeat="(key,value) in pops" >{{key}}</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="col-md-1">
+                    全體人數
+                  </td>
+                  <td class="col-md-1" ng-repeat="(key,pop) in pops">
+                    <div ><input class="form-control" type="text"  ng-model="pop" ng-change="setPop(key,pop)"/></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-md-1" >投票比例</td>
+                  <td class="col-md-1" ng-repeat="(key,vote_rate) in vote_rates">
+                    <div>
+                      <input class="form-control" ng-model="vote_rate" ng-change="setVoteRate(key,vote_rate)"/>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <td class="col-md-1" >年齡層</td>
-                <td class="col-md-1 text-center" ng-repeat="(key,value) in pops" >{{key}}</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="col-md-1 ">可投票數</td>
-                <td class="col-md-1 text-right" ng-repeat="(key,pop) in pops" >{{pop*vote_rates[key]|number:0}}</td>
-              </tr>
-            </tbody>
-          </table>
+          <!-- End of 母體人數設定 -->
+          <!-- Begin of 各候選人 -->
+          <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">民調支持率</h3></div>
+            <table class="table table-striped">
+              <tbody>
+                <tr ng-repeat = "support in supports">
+                  <td class="col-md-1">{{support.name}}</td>
+                  <td class="col-md-1" ng-repeat="(key,r) in support.rate" >
+                    <div><input class="form-control" ng-model="r" ng-change="setSupportRate(support,key,r)"/></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- End of 各候選人 -->
         </div>
-        <div class="panel panel-default">
-          <div class="panel-heading"><h3 class="panel-title">預估得票數</h3></div>
-          <div class="panel-body">
-            各年齡人數 * 預估會投票比率* 各年齡支持率
-          </div>
-          <table class="table table-striped">
-            <tbody>
-            <!-- 各候選人 -->
-              <tr ng-repeat = "support in supports">
-                <td class="col-md-1">{{support.name}}</td>
-                <td class="col-md-1 text-right" ng-repeat="(key,r) in support.rate" >
-                  <div>{{r*vote_rates[key]*pops[key]|number:0}}</div>
-                </td>
-              </tr>
-          </tbody>
+      </div>
+      <!-- End of Parameter Pannel -->
+      <!-- Begin of Result Pannel -->
+      <div class="col-md-6">
+      <h3>模擬成果</h3>
+      <div>
+       </div>
+          <!-- Begin of 候選人得票數 -->
+          <div class="panel panel-default">
 
-          </table>
-        </div>
-        <!-- Begin of 候選人得票數 -->
-        <div class="panel panel-default">
-
-          <div class="panel-heading"><h3 class="panel-title">候選人得票數</h3></div>
-          <div class="panel-body">
-            加總 = 各年齡人數 * 預估會投票比率* 各年齡支持率
-          </div>
-          <table class="table table-striped">
-            <thead>
-              <td>候選人</td>
-              <td>政黨</td>
-              <td>編號</td>
-              <td>得票數</td>
-              <td>得票比例</td>
-            </thead>
-            <tbody>
-            <!-- 各候選人 -->
-              <tr ng-repeat = "support in supports">
-                <td class="col-md-1">{{support.name}}</td>
-                <td class="col-md-1">{{support.party}}</td>
-                <td class="col-md-1">{{support.no}}</td>
-                <td class="col-md-1 text-right">
-                  <div>{{getSimVoteCnt(support)|number:0}}</div>
-                </td>
-                <td class="col-md-1 ">
-                  <div class="progress text-right" style="margin:0px">
-                    {{getSimVotePct(support)|percentage:2}}
-                    <div class="progress-bar " role="progressbar" aria-valuenow="{{getSimVotePct(support)|number:0.2}}" aria-valuemin="0" aria-valuemax="1" ng-style="getSimVotePctWidth(support)">
+            <div class="panel-heading"><h3 class="panel-title">候選人得票數</h3></div>
+            <div class="panel-body">
+              加總 = 各年齡人數 * 預估會投票比率* 各年齡支持率
+            </div>
+            <table class="table table-striped">
+              <thead>
+                <td>候選人</td>
+                <td>政黨</td>
+                <td>編號</td>
+                <td>得票數</td>
+                <td>得票比例</td>
+              </thead>
+              <tbody>
+              <!-- 各候選人 -->
+                <tr ng-repeat = "support in supports">
+                  <td class="col-md-1">{{support.name}}</td>
+                  <td class="col-md-1">{{support.party}}</td>
+                  <td class="col-md-1">{{support.no}}</td>
+                  <td class="col-md-1 text-right">
+                    <div>{{getSimVoteCnt(support)|number:0}}</div>
+                  </td>
+                  <td class="col-md-1 ">
+                    <div class="progress text-right" style="margin:0px">
+                      {{getSimVotePct(support)|percentage:2}}
+                      <div class="progress-bar " role="progressbar" aria-valuenow="{{getSimVotePct(support)|number:0.2}}" aria-valuemin="0" aria-valuemax="1" ng-style="getSimVotePctWidth(support)">
+                      </div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-          </tbody>
+                  </td>
+                </tr>
+            </tbody>
 
-          </table>
-        </div>
-        <!-- End of 候選人得票數 -->
+            </table>
+          </div>
+          <!-- End of 候選人得票數 -->
+          <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">各年齡票數</h3></div>
+            <div class="panel-body">
+              各年齡人數 * 預估會投票比率
+            </div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <td class="col-md-1" >年齡層</td>
+                  <td class="col-md-1 text-center" ng-repeat="(key,value) in pops" >{{key}}</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="col-md-1 ">可投票數</td>
+                  <td class="col-md-1 text-right" ng-repeat="(key,pop) in pops" >{{pop*vote_rates[key]|number:0}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">預估得票數</h3></div>
+            <div class="panel-body">
+              各年齡人數 * 預估會投票比率* 各年齡支持率
+            </div>
+            <table class="table table-striped">
+              <tbody>
+              <!-- 各候選人 -->
+                <tr ng-repeat = "support in supports">
+                  <td class="col-md-1">{{support.name}}</td>
+                  <td class="col-md-1 text-right" ng-repeat="(key,r) in support.rate" >
+                    <div>{{r*vote_rates[key]*pops[key]|number:0}}</div>
+                  </td>
+                </tr>
+            </tbody>
+
+            </table>
+
+      </div>
+      <!-- End of Result Pannel -->
     </div>
-    <!-- End of Result Pannel -->
+    <!-- End of 2nd row -->
   </div>
   </body>
 </html>
